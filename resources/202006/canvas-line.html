@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="show" width="2550" height="255"></canvas>
+
+    <script>
+        (function () {
+            let datas = new Array(2550).fill(0),
+                canvas = document.getElementById('show'),
+                ctx = canvas.getContext("2d");
+
+
+            setInterval(() => {
+                let new_data = new Array(parseInt(Math.random() * 50) + 10)
+                    .fill(0).map(function (a) {
+                        return parseInt(Math.random() * 64);
+                    });
+
+                Array().push.apply(datas, new_data);
+                show_data(datas.slice(-2550));
+            }, 1000);
+
+
+            function show_data(data) {
+                canvas.height = 255;
+                ctx.moveTo(0, 128);
+                for (let i = 0; i < data.length; i++) {
+                    ctx.lineTo(i, 64 + data[i]);
+                }
+                ctx.stroke();
+            }
+
+        })();
+
+    </script>
+</body>
+
+</html>
